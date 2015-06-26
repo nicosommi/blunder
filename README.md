@@ -3,10 +3,10 @@
 ES6 Component for handling errors.
 
 ```javascript
-import Blunder from "blunder";
+import MultiError from "blunder";
 
-const blunder = new Blunder;
-blunder.saySomething(); // will output "Something"
+const multiError = new Blunder([new Error("some error"), new Error("some other")]); //you can use an array or just one
+throw multiError; //multiError is an instance of Error too
 ```
 
 # Quality and Compatibility
@@ -42,26 +42,36 @@ npm install blunder --save
 
 ```
 // ES6
-import blunder from "blunder";
+import MultiError from "blunder";
 ```
 
 ```
 // ES5
-var blunder = require("blunder");
+var MultiError = require("blunder");
 ```
 
 ```
 // Require.js
 define(["require"] , function (require) {
-    var blunder = require("blunder");
+    var MultiError = require("blunder");
 });
 ```
 
 # Getting Started
 
-## More insights
+## Using it
+You can import the MultiError class from blunder.
+It extends the Error native class and allows you to join several errors.
+The constructor accepts both an Error instances or an Error array.
+There is also a push method to add more errors on it.
 
-In order to say something, you should know that `blunder()` ... (add your test here)
+```javascript
+import MultiError from "blunder";
+
+const multiError = new Blunder([new Error("some error"), new Error("some other")]); //you can use an array or just one
+multiError.push(Error("one more thing wrong"));
+throw multiError; //multiError is an instance of Error too
+```
 
 # How to Contribute
 
