@@ -1,12 +1,17 @@
 language: node_js
 node_js:
-- '0.12'
-- '0.11'
-- '0.10'
-- 'iojs-v1'
-- 'iojs-v2'
+  - '0.12'
+  - '0.11'
+  - '0.10'
+  - iojs-v1
+  - iojs-v2
 script: npm test
 before_script:
-- npm install
+  - npm install
 after_success:
   - ./node_modules/coveralls/bin/coveralls.js < ./lcov.info
+env:
+  global:
+    - secure: t3AoWhVrg7Z4kNmUie7poztykii3RyCltD3mFvWQ5i6oRdYpaG0of4tCQUGm4dzk8sO6OXlSfIx4aUYRD0PTbu8FQSzuyOVN4jjS+vpNBesyxLpC+JUp74vBW6Y2MjcSck+DfD4STCtA7L9P+Fvxr1m2MlewaSXVGsBWuZcsF+V9Pjv+RjQE/+tacP2ILQyQTJf3vBmqCC9MMreNihnK06+9eKw8BQ5EmulSwB2+oTwFUvFJX+oJSApkx7Q8fza2HN8TsCh7RR5rU7BN/v5cMQxuBZJwAOXMlnEJC3CaOhl6fzNzAEv7dbDDJeftLRKfPRSRT7vIpE5JLho5kH5IvD9xs7dQHnCzTHXp2RXLvEoNvohphpQHgsKOqRsuq04b4J3OylzJ1/TDHDv6r5nQZgiZYPIbMEsoevJCYpNOMuFtWOfxQULSBfjOrjSQS8D+63DmOaCknbIJpnCWmuP8isnOZPHg4ZiBXmIuiT+JCoMSTI8SEwDdj6RdUtUhqVOc0cOQizuc3Pa4MOzz/HO6oBubRA0vZyfV4+gICNueVGP1d28c+Dva7l1Fmd3Be3B3wlRWdML8VC5aMx7CQLHJsh7zB0CN2r0mXdQujHOR6jPDkSLoZaYq4gIAHJ3U6kfB0KtgF2T6QyNq1d4QGW1LZqwc+dOt9/b+f56Kg2B2hkA=
+    - secure: ovVivTJEf7vRun+ocoA6987fpnGIXsObyeh9bq/XWr/Ty7WNqyY+iD4YnopfOAqqmx7MX7KSD2PGsDDMGCxllrizsD8qnapx+13kofxoFiRJQeZuXBgKQ0jj5qE4McLcJ/eMcMPq5BlfZsVNrKTjVFYCfjARIIMaTmBBd0oq5w097PDkG4iqaWVPPOkLurFBdUv5um2xlJnZuXRtIdTQeWmA/Y/dRY/J/g5Tv2Ci6CQZ7CrLBLtGgCubKK/vz5ssop07szAHubpMbsWHOpODf3YQ9N2ElJaY9lz0/rhFP62a8WloktPxPvUJh/ZBkVH1e00gnJEoe++kiwstiGCoSFeC9EYndUsdxNB8pKSWMQ2jeyOZI9oHpDv3nhTBaCN2apygiuNJdNqNYKI1gtFFPC4CpNewz4O+ZEXGzf+pNP80D1iiTn+kk4D4beqwdt64iHKNP2/hlN687j5fQVHxOI0Kd48e/1fON7QeNZoq9MMK9J9+vh/zPuFC9R1Z+UHWXbQA71J/Zerj1FqwHKtXvdjN5Q3u3Ra6dp1OI7x+ocerxD5bfzsofWORzumcnrcQe3RcN48V5WOzU9Pej7b6OlW3sBDf0MDd2dbxO8QFCB+rZ2IdTJ//44WOqK7DL9eXt/K89Stoh7pOl/PUNLnRhn6HftTxJvbmFp7Le0qNQEw=
+    - secure: s0zn50SblpJy31TAhhdPfMf1YUGrlqvjtaaoNoc0B88W6xsxlHO0eWhaKlKVae2te2EVYEn7YrC64ksGdfGy70jYMbl41HFtRbCQ7HAZm0nTNTzt/LFX/J/8N9TcsJV4uPTxhXjKGwl+1TVuw7fTk3YfFedAoVCfDFJxRJIvHCYyQhA7ShTk4XwPSEB/4PoAT24lkP5uMu8ifp2wkrzt4rFgLaZIefK95I1ZkjO6Q+asrfITs+uFK/4xx9ryBvObkdaeiRorO2sPVUYTYgL0UDMXeHJf0fkuACJYjF7E8mZjUvFty0NxKg9OjCyD/KRuo4grwgA/ZugqFQBF0S4tBJhL/zVJYdHysQ8hDegiVT9h8fyEqQZA09sNYL4L3hBwIik9rpVf7RL91ea4+s63w1cD+/hXZgy+QLHvA+TMtD0wrLMFaaq9d/d91g7C2h7BbCVlNFJoZvcg9A42yPiuR+GTXwenDjnV2zzRPuTQ4SxipePO/16JC+5PEXt1blaXCSUMvF0lu9xj7vUcr5xsekxxbGgqeQ19HOuBM/3yeqLy4k1Vf+08DWrkbsKO6Z64yrMicYEltSqWYM60CPnOYNjmz7krCjBexnLMGKsalEpnpmhA83YDAL+QmHy7uwlRGHPk8aKEKGv4EtiW+xtURNsWNjqm90K7nC9GhyEZOqg=
