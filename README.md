@@ -1,6 +1,6 @@
 # Blunder.js [![npm version](https://img.shields.io/npm/v/blunder.svg)](https://www.npmjs.com/package/blunder) [![license type](https://img.shields.io/npm/l/blunder.svg)](https://github.com/FreeAllMedia/blunder.git/blob/master/LICENSE) [![npm downloads](https://img.shields.io/npm/dm/blunder.svg)](https://www.npmjs.com/package/blunder) ![ECMAScript 6](https://img.shields.io/badge/ECMAScript-6-red.svg)
 
-ES6 Component for handling errors.
+ES6 Component for handling errors
 
 ```javascript
 import MultiError from "blunder";
@@ -68,9 +68,11 @@ There is also a push method to add more errors on it.
 ```javascript
 import MultiError from "blunder";
 
-const multiError = new Blunder([new Error("some error"), new Error("some other")]); //you can use an array or just one
-multiError.push(Error("one more thing wrong"));
-throw multiError; //multiError is an instance of Error too
+someFunctionThatReturnAnInternError((error) => {//if error is a blunder Multierror it's ok too!
+	const multiError = new MultiError([new Error("another error attached"), error]);
+	multiError.push(Error("one more thing wrong"));
+	callback(multiError);
+});
 ```
 
 # How to Contribute
