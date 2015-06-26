@@ -103,5 +103,3 @@ If our saucelabs credentials are not installed, the tests are setup to automatic
 If you'd like to develop Blunder.js using SauceLabs, you need only create a new entry in our [issue tracker](https://github.com/FreeAllMedia/blunder/issues) asking for our SauceLabs credentials.
 
 We'll send over all credentials specific to this project so that you can perform comprehensive cross-platform tests.
-
-
