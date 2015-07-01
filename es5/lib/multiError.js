@@ -36,6 +36,9 @@ var MultiError = (function (_Error) {
 				get: this[message]
 			}
 		});
+
+		this.name = prefix; //so it has title to group by on jsonapi
+
 		if (Array.isArray(errors)) {
 			errors.forEach(function (error) {
 				_this.push(error);

@@ -16,13 +16,21 @@ describe("MultiError(errors)", function () {
 	});
 
 	describe("(with prefix)", function () {
+		var prefix = undefined;
 		beforeEach(function () {
-			multiError = new _libMultiErrorJs2["default"](errors, "Error");
+			prefix = "someprefix";
+			multiError = new _libMultiErrorJs2["default"](errors, prefix);
 		});
 
 		describe(".message", function () {
 			it("should concatenate messages together with the prefix", function () {
-				multiError.message.should.eql("Error: You cannot do that, You cannot do that, either, You again? Stop it");
+				multiError.message.should.eql(prefix + ": You cannot do that, You cannot do that, either, You again? Stop it");
+			});
+		});
+
+		describe(".name", function () {
+			it("should have the same name as the prefix to correctly allow gouping by name", function () {
+				multiError.name.should.equal(prefix);
 			});
 		});
 	});
