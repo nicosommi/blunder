@@ -13,13 +13,21 @@ describe("MultiError(errors)", () => {
 	});
 
 	describe("(with prefix)", () => {
+		let prefix;
 		beforeEach(() => {
-			multiError = new MultiError(errors, "Error");
+			prefix = "someprefix";
+			multiError = new MultiError(errors, prefix);
 		});
 
 		describe(".message", () => {
 			it("should concatenate messages together with the prefix", () => {
-				multiError.message.should.eql("Error: You cannot do that, You cannot do that, either, You again? Stop it");
+				multiError.message.should.eql(`${prefix}: You cannot do that, You cannot do that, either, You again? Stop it`);
+			});
+		});
+
+		describe(".name", () => {
+			it("should have the same name as the prefix to correctly allow gouping by name", () => {
+				multiError.name.should.equal(prefix);
 			});
 		});
 	});
