@@ -68,7 +68,7 @@ var MultiError = (function (_Error) {
 	}, {
 		key: "toJSON",
 		value: function toJSON() {
-			var result = [];
+			var result = new Array();
 			this.errors.forEach(function (error) {
 				//standard ERROR properties from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 				result.push({ name: error.name, message: error.message });
