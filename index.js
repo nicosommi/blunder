@@ -1,1 +1,1 @@
-module.exports = require("./es5/lib/multiError.js");
+module.exports = require("./es5/lib/blunder.js");

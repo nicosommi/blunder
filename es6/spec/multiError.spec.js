@@ -65,4 +65,16 @@ describe("MultiError(errors)", () => {
 			multiError.message.should.eql("You cannot do that, You cannot do that, either, You again? Stop it");
 		});
 	});
+
+	describe("(methods)", () => {
+		describe(".toJSON", () => {
+			it("should return an array", () => {
+				multiError.toJSON().should.be.instanceOf(Array);
+			});
+
+			it("should return an array with the proper length", () => {
+				multiError.toJSON().length.should.equal(3);
+			});
+		});
+	});
 });

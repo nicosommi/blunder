@@ -45,6 +45,15 @@ export default class MultiError extends Error {
 		}
 	}
 
+	toJSON() {
+		let result = new Array();
+		this.errors.forEach((error) => {
+			//standard ERROR properties from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+			result.push({name: error.name, message: error.message});
+		});
+		return result;
+	}
+
 	[message]() {
 		let returnedMessage = "";
 		if(this._prefix) {
