@@ -66,6 +66,16 @@ var MultiError = (function (_Error) {
 			}
 		}
 	}, {
+		key: "toJSON",
+		value: function toJSON() {
+			var result = [];
+			this.errors.forEach(function (error) {
+				//standard ERROR properties from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+				result.push({ name: error.name, message: error.message });
+			});
+			return result;
+		}
+	}, {
 		key: message,
 		value: function value() {
 			var returnedMessage = "";
