@@ -1,4 +1,4 @@
-import MultiError from "../lib/multiError.js";
+import MultiError from "../../";
 
 describe("MultiError(errors)", () => {
 	let multiError, errors;
