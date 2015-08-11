@@ -1,16 +1,15 @@
-const message = Symbol();
+import privateData from "incognito";
+
+const message = Symbol("message");
 
 export default class MultiError extends Error {
 	constructor(errors, prefix) {
 		super();
+		const _ = privateData(this);
+		_.prefix = prefix;
 		Object.defineProperties(
 			this,
 			{
-				"_prefix": {
-					enumerable: false,
-					writable: true,
-					value: prefix
-				},
 				"errors": {
 					writable: false,
 					enumerable: true,
@@ -34,13 +33,14 @@ export default class MultiError extends Error {
 	}
 
 	push(newError) {
+		const _ = privateData(this);
 		if (newError.constructor.name === this.constructor.name) {
 			newError.errors.forEach((error) => {
-				error.name = this._prefix || error.name;
+				error.name = _.prefix || error.name;
 				this.errors.push(error);
 			});
 		} else {
-			newError.name = this._prefix || newError.name;
+			newError.name = _.prefix || newError.name;
 			this.errors.push(newError);
 		}
 	}
@@ -55,9 +55,10 @@ export default class MultiError extends Error {
 	}
 
 	[message]() {
+		const _ = privateData(this);
 		let returnedMessage = "";
-		if(this._prefix) {
-			returnedMessage = this._prefix + ": ";
+		if(_.prefix) {
+			returnedMessage = _.prefix + ": ";
 		}
 
 		returnedMessage += this.errors.map((error) => {

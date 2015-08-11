@@ -33,7 +33,9 @@
     "url": "https://github.com/FreeAllMedia/blunder/issues"
   },
   "homepage": "https://github.com/FreeAllMedia/blunder",
-  "dependencies": {},
+  "dependencies": {
+    "incognito": "^0.1.2"
+  },
   "devDependencies": {
     "babel": "^5.5.6",
     "chai": "^3.0.0",
