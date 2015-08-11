@@ -8,11 +8,17 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-var message = Symbol();
+var _incognito = require("incognito");
+
+var _incognito2 = _interopRequireDefault(_incognito);
+
+var message = Symbol("message");
 
 var MultiError = (function (_Error) {
 	function MultiError(errors, prefix) {
@@ -21,12 +27,9 @@ var MultiError = (function (_Error) {
 		_classCallCheck(this, MultiError);
 
 		_get(Object.getPrototypeOf(MultiError.prototype), "constructor", this).call(this);
+		var _ = (0, _incognito2["default"])(this);
+		_.prefix = prefix;
 		Object.defineProperties(this, {
-			"_prefix": {
-				enumerable: false,
-				writable: true,
-				value: prefix
-			},
 			"errors": {
 				writable: false,
 				enumerable: true,
@@ -55,13 +58,14 @@ var MultiError = (function (_Error) {
 		value: function push(newError) {
 			var _this2 = this;
 
+			var _ = (0, _incognito2["default"])(this);
 			if (newError.constructor.name === this.constructor.name) {
 				newError.errors.forEach(function (error) {
-					error.name = _this2._prefix || error.name;
+					error.name = _.prefix || error.name;
 					_this2.errors.push(error);
 				});
 			} else {
-				newError.name = this._prefix || newError.name;
+				newError.name = _.prefix || newError.name;
 				this.errors.push(newError);
 			}
 		}
@@ -78,9 +82,10 @@ var MultiError = (function (_Error) {
 	}, {
 		key: message,
 		value: function value() {
+			var _ = (0, _incognito2["default"])(this);
 			var returnedMessage = "";
-			if (this._prefix) {
-				returnedMessage = this._prefix + ": ";
+			if (_.prefix) {
+				returnedMessage = _.prefix + ": ";
 			}
 
 			returnedMessage += this.errors.map(function (error) {
