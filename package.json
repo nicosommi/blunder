@@ -1,6 +1,6 @@
 {
   "name": "blunder",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "ES6 Component for handling errors.",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,9 @@
     "url": "https://github.com/FreeAllMedia/blunder/issues"
   },
   "homepage": "https://github.com/FreeAllMedia/blunder",
-  "dependencies": {},
+  "dependencies": {
+    "incognito": "^0.1.2"
+  },
   "devDependencies": {
     "babel": "^5.5.6",
     "chai": "^3.0.0",
