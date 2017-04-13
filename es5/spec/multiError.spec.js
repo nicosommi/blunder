@@ -1,25 +1,29 @@
 "use strict";
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 var _ = require("../../");
 
 var _2 = _interopRequireDefault(_);
 
+var _chai = require("chai");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _chai.should)();
+
 describe("MultiError(errors)", function () {
-	var multiError = undefined,
-	    errors = undefined;
+	var multiError = void 0,
+	    errors = void 0;
 
 	beforeEach(function () {
 		errors = [new Error("You cannot do that"), new Error("You cannot do that, either"), new Error("You again? Stop it")];
-		multiError = new _2["default"](errors);
+		multiError = new _2.default(errors);
 	});
 
 	describe("(with prefix)", function () {
-		var prefix = undefined;
+		var prefix = void 0;
 		beforeEach(function () {
 			prefix = "someprefix";
-			multiError = new _2["default"](errors, prefix);
+			multiError = new _2.default(errors, prefix);
 		});
 
 		describe(".message", function () {
@@ -35,13 +39,26 @@ describe("MultiError(errors)", function () {
 		});
 	});
 
+	describe("(without prefix)", function () {
+		beforeEach(function () {
+			multiError = new _2.default(errors);
+		});
+
+		describe(".name", function () {
+			it("should have the a name", function () {
+				multiError.name.should.be.ok;
+			});
+		});
+	});
+
 	describe(".errors", function () {
 		it("should be an instance of Array", function () {
 			multiError.errors.should.be.instanceOf(Array);
 		});
+
 		describe("(with prefix on array)", function () {
 			beforeEach(function () {
-				multiError = new _2["default"](errors, "ErrorPrefix");
+				multiError = new _2.default(errors, "ErrorPrefix");
 			});
 
 			it("should set the errors name to be the prefix", function () {
@@ -49,16 +66,16 @@ describe("MultiError(errors)", function () {
 			});
 		});
 		it("should be set to the errors passing an array of Errors by the constructor", function () {
-			multiError = new _2["default"](errors);
+			multiError = new _2.default(errors);
 			multiError.errors.should.eql(errors);
 		});
 		it("should be set to the errors passing an Error on the constructor", function () {
 			var originalError = new Error("some error");
-			multiError = new _2["default"](originalError);
+			multiError = new _2.default(originalError);
 			multiError.errors[0].should.eql(originalError);
 		});
 		it("should be set to an empty array when nothing is passed by the constructor", function () {
-			multiError = new _2["default"]();
+			multiError = new _2.default();
 			multiError.errors.should.eql([]);
 		});
 	});

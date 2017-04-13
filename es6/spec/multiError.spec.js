@@ -1,4 +1,6 @@
 import MultiError from "../../";
+import { should } from "chai";
+should()
 
 describe("MultiError(errors)", () => {
 	let multiError, errors;
@@ -32,10 +34,23 @@ describe("MultiError(errors)", () => {
 		});
 	});
 
+	describe("(without prefix)", () => {
+		beforeEach(() => {
+			multiError = new MultiError(errors);
+		});
+
+		describe(".name", () => {
+			it("should have the a name", () => {
+				multiError.name.should.be.ok;
+			});
+		});
+	});
+
 	describe(".errors", () => {
 		it("should be an instance of Array", () => {
 			multiError.errors.should.be.instanceOf(Array);
 		});
+
 		describe("(with prefix on array)", () => {
 			beforeEach(() => {
 				multiError = new MultiError(errors, "ErrorPrefix");

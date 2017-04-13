@@ -21,9 +21,10 @@ export default class MultiError extends Error {
 			}
 		);
 
-		this.name = prefix; //so it has title to group by on jsonapi
+		this.name = prefix || 'error'; //so it has title to group by on jsonapi
 
 		if (Array.isArray(errors)) {
+				console.log('this is', { tp: this.push })
 			errors.forEach((error) => {
 				this.push(error);
 			});
