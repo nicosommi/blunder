@@ -44,6 +44,7 @@ function _extendableBuiltin(cls) {
 }
 
 var message = Symbol("message");
+var getErrorName = Symbol("getErrorName");
 
 var MultiError = function (_extendableBuiltin2) {
 	_inherits(MultiError, _extendableBuiltin2);
@@ -67,31 +68,42 @@ var MultiError = function (_extendableBuiltin2) {
 		});
 
 		_this.name = prefix || 'error'; //so it has title to group by on jsonapi
-
-		if (Array.isArray(errors)) {
-			console.log('this is', { tp: _this.push });
-			errors.forEach(function (error) {
-				_this.push(error);
-			});
-		} else if (errors instanceof Error) {
-			_this.push(errors);
-		}
+		_this.concat(errors);
 		return _this;
 	}
 
 	_createClass(MultiError, [{
-		key: "push",
-		value: function push(newError) {
+		key: "concat",
+		value: function concat(errors) {
 			var _this2 = this;
 
+			if (Array.isArray(errors)) {
+				console.log('this is', { tp: this.push });
+				errors.forEach(function (error) {
+					_this2.push(error);
+				});
+			} else if (errors instanceof Error) {
+				this.push(errors);
+			}
+		}
+	}, {
+		key: getErrorName,
+		value: function value(error) {
 			var _ = (0, _incognito2.default)(this);
+			return _.prefix || error.name;
+		}
+	}, {
+		key: "push",
+		value: function push(newError) {
+			var _this3 = this;
+
 			if (newError.constructor.name === this.constructor.name) {
 				newError.errors.forEach(function (error) {
-					error.name = _.prefix || error.name;
-					_this2.errors.push(error);
+					error.name = _this3[getErrorName](error);
+					_this3.errors.push(error);
 				});
 			} else {
-				newError.name = _.prefix || newError.name;
+				newError.name = this[getErrorName](newError);
 				this.errors.push(newError);
 			}
 		}

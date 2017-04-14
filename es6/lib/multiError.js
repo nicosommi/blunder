@@ -1,6 +1,7 @@
 import privateData from "incognito";
 
 const message = Symbol("message");
+const getErrorName = Symbol("getErrorName");
 
 export default class MultiError extends Error {
 	constructor(errors, prefix) {
@@ -22,7 +23,10 @@ export default class MultiError extends Error {
 		);
 
 		this.name = prefix || 'error'; //so it has title to group by on jsonapi
+		this.concat(errors)
+	}
 
+	concat(errors) {
 		if (Array.isArray(errors)) {
 				console.log('this is', { tp: this.push })
 			errors.forEach((error) => {
@@ -33,15 +37,19 @@ export default class MultiError extends Error {
 		}
 	}
 
-	push(newError) {
+	[getErrorName](error) {
 		const _ = privateData(this);
+		return _.prefix || error.name;
+	}
+
+	push(newError) {
 		if (newError.constructor.name === this.constructor.name) {
 			newError.errors.forEach((error) => {
-				error.name = _.prefix || error.name;
+				error.name = this[getErrorName](error);
 				this.errors.push(error);
 			});
 		} else {
-			newError.name = _.prefix || newError.name;
+			newError.name = this[getErrorName](newError);
 			this.errors.push(newError);
 		}
 	}
