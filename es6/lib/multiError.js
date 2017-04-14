@@ -28,7 +28,6 @@ export default class MultiError extends Error {
 
 	concat(errors) {
 		if (Array.isArray(errors)) {
-				console.log('this is', { tp: this.push })
 			errors.forEach((error) => {
 				this.push(error);
 			});
@@ -39,7 +38,7 @@ export default class MultiError extends Error {
 
 	[getErrorName](error) {
 		const _ = privateData(this);
-		return _.prefix || error.name;
+		return error.name || _.prefix;
 	}
 
 	push(newError) {
@@ -70,9 +69,7 @@ export default class MultiError extends Error {
 			returnedMessage = _.prefix + ": ";
 		}
 
-		returnedMessage += this.errors.map((error) => {
-			return error.message;
-		}).join(", ");
+		returnedMessage += this.errors.map((error) => error.message).join(", ");
 
 		return returnedMessage;
 	}

@@ -78,7 +78,6 @@ var MultiError = function (_extendableBuiltin2) {
 			var _this2 = this;
 
 			if (Array.isArray(errors)) {
-				console.log('this is', { tp: this.push });
 				errors.forEach(function (error) {
 					_this2.push(error);
 				});
@@ -90,7 +89,7 @@ var MultiError = function (_extendableBuiltin2) {
 		key: getErrorName,
 		value: function value(error) {
 			var _ = (0, _incognito2.default)(this);
-			return _.prefix || error.name;
+			return error.name || _.prefix;
 		}
 	}, {
 		key: "push",

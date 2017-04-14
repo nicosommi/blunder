@@ -56,8 +56,8 @@ describe("MultiError(errors)", () => {
 				multiError = new MultiError(errors, "ErrorPrefix");
 			});
 
-			it("should set the errors name to be the prefix", () => {
-				multiError.errors[0].name.should.equal("ErrorPrefix");
+			it("should keep the error name as is", () => {
+				multiError.errors[0].name.should.equal("Error");
 			});
 		});
 		it("should be set to the errors passing an array of Errors by the constructor", () => {
